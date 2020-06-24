@@ -1,0 +1,29 @@
+---
+- name: Common configuration for all servers
+  hosts: all
+  gather_facts: true
+  become: yes
+  roles:
+    - common
+
+- name: Deploy Frontend Loadbalancer
+  hosts: frontends
+  become: true
+  gather_facts: true
+  roles:
+    - haproxy
+
+- name: Deploy Tomcat on application servers
+  hosts: apps
+  become: true
+  gather_facts: true
+  roles:
+    - tomcat
+    - tomcat-config
+
+- name: Deploy DB backend
+  hosts: appdbs
+  gather_facts: true
+  become: true
+  roles:
+    - geerlingguy.postgresql

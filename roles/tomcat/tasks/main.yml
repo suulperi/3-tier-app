@@ -1,0 +1,11 @@
+---
+  - name: Install tomcat
+    package:
+      name: tomcat
+      state: latest
+
+  - name: Start and Enable Tomcat Service
+    service:
+      name: tomcat
+      enabled: yes
+      state: started
